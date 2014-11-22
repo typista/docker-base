@@ -11,7 +11,7 @@ else
 	REPO=`echo $REPO | sed -r "s/docker\-//g"`
 	IMAGE=$USER/$REPO
 	if [ "$2" != "" ];then
-    		IMAGE=$IMAGE:$1
+    		IMAGE=$IMAGE:$2
 	fi
 	docker run -d --privileged  --name="$__FQDN__" --hostname="$__HOSTNAME__" $IMAGE
 
