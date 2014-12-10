@@ -13,7 +13,9 @@ else
 	if [ "$2" != "" ];then
     		IMAGE=$IMAGE:$2
 	fi
-	docker run -d --privileged  --name="$__FQDN__" --hostname="$__HOSTNAME__" $IMAGE
+	docker run -d --privileged  --name="$__FQDN__" --hostname="$__HOSTNAME__" \
+		-v ${PWD}/export/root/:/root/export/ \
+		$IMAGE
 
 	DIR_CONTAINER=dst/$__FQDN__
 	if [ ! -e $DIR_CONTAINER ];then
