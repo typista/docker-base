@@ -49,6 +49,6 @@ RUN touch /etc/bashrc && \
 	yum update -y && \
     yum install -y devtoolset-2-gcc devtoolset-2-binutils && \
     yum install -y devtoolset-2-gcc-c++ devtoolset-2-gcc-gfortran && \
-    scl enable devtoolset-2 bash && \
-    PATH=/opt/rh/devtoolset-2/root/usr/bin:$PATH
+	ln -s /opt/rh/devtoolset-2/root/usr/bin/* /usr/local/bin/ && \
+	hash -r
 
