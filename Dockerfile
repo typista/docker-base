@@ -46,9 +46,9 @@ RUN touch /etc/bashrc && \
 	yum install -y vim wget which git curl tar zip unzip bzip2 make zlib-devel crontabs && \
 	yum install -y wget openssl openssl-devel && \
     wget http://people.centos.org/tru/devtools-2/devtools-2.repo -O /etc/yum.repos.d/devtools-2.repo && \
+	yum update -y && \
     yum install -y devtoolset-2-gcc devtoolset-2-binutils && \
     yum install -y devtoolset-2-gcc-c++ devtoolset-2-gcc-gfortran && \
-    yum remove -y gcc && \
     scl enable devtoolset-2 bash && \
     PATH=/opt/rh/devtoolset-2/root/usr/bin:$PATH
 
