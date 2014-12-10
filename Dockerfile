@@ -24,24 +24,6 @@ RUN touch /etc/bashrc && \
 	echo 'set tabstop=4' >> /etc/skel/.vimrc && \
 	echo 'set paste' >> /etc/skel/.vimrc && \
 	cp /etc/skel/.vimrc /root/ && \
-	touch /etc/entrypoint.sh && \
-	echo '#!/bin/bash' >> /etc/entrypoint.sh && \
-	echo 'LOCALTIME=/etc/localtime' >> /etc/entrypoint.sh && \
-	echo 'if [ ! -L $LOCALTIME ]; then' >> /etc/entrypoint.sh && \
-  	echo 'rm $LOCALTIME' >> /etc/entrypoint.sh && \
-  	echo 'ln -s /usr/share/zoneinfo/Asia/Tokyo $LOCALTIME' >> /etc/entrypoint.sh && \
-	echo 'fi' >> /etc/entrypoint.sh && \
-	touch /root/start.sh && \
-	chmod +x /root/start.sh && \
-	touch /root/crontab.txt && \
-	echo '* * * * * /root/start.sh 2>&1 1>/dev/null' >> /root/crontab.txt && \
-	echo 'crontab /root/crontab.txt' >> /etc/entrypoint.sh && \
-	echo '/etc/init.d/crond start' >> /etc/entrypoint.sh && \
-	echo '/usr/bin/tail -f /dev/null' >> /etc/entrypoint.sh && \
-	touch /root/execme1st.sh && \
-	echo '#!/bin/bash' >> /root/execme1st.sh && \
-	chmod +x /etc/entrypoint.sh && \
-	chmod +x /root/execme1st.sh && \
 	yum update -y && \
 	yum install -y vim wget which git curl tar zip unzip bzip2 make zlib-devel crontabs && \
 	yum install -y wget openssl openssl-devel && \
@@ -50,5 +32,7 @@ RUN touch /etc/bashrc && \
     yum install -y devtoolset-2-gcc devtoolset-2-binutils && \
     yum install -y devtoolset-2-gcc-c++ devtoolset-2-gcc-gfortran && \
 	ln -s /opt/rh/devtoolset-2/root/usr/bin/* /usr/local/bin/ && \
-	hash -r
+	hash -r && \
+	wget https://raw.githubusercontent.com/typista/docker-base/master/files/entrypoint.sh -O /etc/entrypoint.sh && \
+	chmod +x /etc/entrypoint.sh
 
